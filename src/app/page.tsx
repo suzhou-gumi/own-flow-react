@@ -1,5 +1,18 @@
 import Image from "next/image";
 
+import "dotenv/config";
+import { db } from "@/drizzle/db";
+import { UserTable } from "@/drizzle/schema";
+
+const main = async () => {
+  await db.insert(UserTable).values({ name: "gumi" });
+
+  const user = await db.query.UserTable.findFirst();
+  console.log(user);
+};
+
+main();
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
